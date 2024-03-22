@@ -61,3 +61,9 @@ Threads: Enable concurrent handling of multiple clients on the server.
 Input/Output Streams: Allow data transfer between the server, clients, and the console.
 
 Looping: Continuous loops in both server and client allow for ongoing interaction.
+
+
+# TODO:
+I still need to add different groups so that each client can choose a group and only talk in that group as per the project instructions.
+
+
