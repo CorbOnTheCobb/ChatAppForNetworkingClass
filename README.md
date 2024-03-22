@@ -55,6 +55,9 @@ Each client, including the sender, receives the broadcasted message and displays
 Key Concepts:
 
 Sockets: Facilitate communication between the server and clients over the network.
+
 Threads: Enable concurrent handling of multiple clients on the server.
+
 Input/Output Streams: Allow data transfer between the server, clients, and the console.
+
 Looping: Continuous loops in both server and client allow for ongoing interaction.
