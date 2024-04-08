@@ -4,6 +4,7 @@ import java.net.*;
 public class ChatClient {
     public static void main(String[] args) {
         String name = args[0];
+        String groupNum = args[1];
         try {
             Socket socket = new Socket("localhost", 12345); // Connect to the server running on localhost:12345
             System.out.println("Connected to server.");
@@ -20,12 +21,16 @@ public class ChatClient {
                 String serverMessage;
                 try {
                     while ((serverMessage = in.readLine()) != null) {
-                        System.out.println(serverMessage);
+                        System.out.println("\n" + serverMessage + "\n");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }).start();
+
+            // Print the group # as the first message so the server can save it (you have to do it twice -- I have no clue why)
+            out.println(groupNum);
+            out.println(groupNum);
 
             String message;
             while (true) {

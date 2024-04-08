@@ -26,8 +26,9 @@ public class ChatServer {
     }
 
     // Broadcast a message to all connected clients
-    public static synchronized void broadcastMessage(String message) {
+    public static synchronized void broadcastMessage(String message, int groupNum) {
         for (ClientHandler client : clients) {
+          if (client.getGroupNum() == groupNum)
             client.sendMessage(message);
         }
     }
@@ -37,9 +38,16 @@ class ClientHandler extends Thread {
     private Socket clientSocket;
     private BufferedReader in;
     private PrintWriter out;
+    private int groupNum = -1;
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
+    }
+
+    public int getGroupNum() {
+      // While groupNum is the default value: do nothing. After, return groupNum 
+      while(groupNum == -1) {}
+      return groupNum;
     }
 
     public void run() {
@@ -48,11 +56,15 @@ class ClientHandler extends Thread {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
+            // Parse the integer from the client's first message and store it
+            while(in.readLine() == null) {}
+            groupNum = Integer.parseInt(in.readLine());
+
             String message;
             while ((message = in.readLine()) != null) {
                 System.out.println(message);
                 // Broadcast the message to all connected clients
-                ChatServer.broadcastMessage(message);
+                ChatServer.broadcastMessage(message, groupNum);
             }
         } catch (IOException e) {
             e.printStackTrace();
