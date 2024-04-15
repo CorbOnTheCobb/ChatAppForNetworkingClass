@@ -5,12 +5,12 @@ public class ChatClient {
     public static void main(String[] args) {
         String name = args[0];
         String groupNum;
-        
+
         if (!args[1].equals("-1"))
           groupNum = args[1];
         else 
           groupNum = "1";
-        
+
         try {
             Socket socket = new Socket("localhost", 12345); // Connect to the server running on localhost:12345
             System.out.println("Connected to server.");
