@@ -4,7 +4,11 @@ import java.net.*;
 public class ChatClient {
     public static void main(String[] args) {
         String name = args[0];
-        String groupNum = args[1];
+        String groupNum;
+        if (!args[1].equals("-1"))
+          groupNum = args[1];
+        else 
+          groupNum = "1";
         try {
             Socket socket = new Socket("localhost", 12345); // Connect to the server running on localhost:12345
             System.out.println("Connected to server.");
@@ -37,7 +41,7 @@ public class ChatClient {
                 // Allow the user to type messages
                 //System.out.print("Enter message: ");
                 message = name + ": " + userInput.readLine();
-                if (message.equalsIgnoreCase("exit")) break; // Exit the loop if the user types "exit"
+                if (message.equalsIgnoreCase(name + ": " + "exit")) break; // Exit the loop if the user types "exit"
                 
                 // Send the message to the server
                 out.println(message);
