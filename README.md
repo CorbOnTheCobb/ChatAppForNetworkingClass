@@ -1,5 +1,5 @@
 # ChatAppForNetworkingClass
-I'm making this chat app for my networking class, and I thought making my code public might help someone else.
+I made this chat app for my networking class, and I thought making my code public might help someone else.
 
 Basic Explanation:
 
@@ -63,7 +63,11 @@ Input/Output Streams: Allow data transfer between the server, clients, and the c
 Looping: Continuous loops in both server and client allow for ongoing interaction.
 
 
-# TODO:
-I still need to add different groups so that each client can choose a group and only talk in that group as per the project instructions.
+# Most Recent Addition: Groups
 
+The client side: The client requires two arguments: the first being the user's name, and the second being the group name. 
+The group name is checked to insure that it is not equal to "-1" since this is the default placeholder value stored on the server end. If it is equal to "-1", it is changed to "1"
+Before the client is allowed to send any messages, the group name is sent to the server twice. For whatever reason, it must be sent twice, or the server does not see it.
 
+The server side: Upon any client connecting to the server, the server stores the very first message sent by the client as the group name since the client's first message will always be the group name. 
+When the client attempts to send a message, the group name of the client is passed into the broadcast message function. The broadcast message function goes through the client list and checks to ensure that the recipient has the same group name before sending the message. 
